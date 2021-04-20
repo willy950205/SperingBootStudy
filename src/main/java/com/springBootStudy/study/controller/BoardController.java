@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -26,5 +28,21 @@ public class BoardController {
         model.addAttribute("boards",boards);
         return "board/list";
     }
+
+    @GetMapping("/write")
+    public String write(Model model){
+        model.addAttribute("board",new Board());
+        System.out.println("---------write CHeck-------");
+        return "board/write";
+    }
+
+    @PostMapping("/write")
+    public String write(@ModelAttribute Board board){
+        System.out.println("---------post------write CHeck-------");
+        boardRepository.save(board);
+
+        return "redirect:/board/list";
+    }
+
 
 }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head th:replace="fragments/commons :: head('게시판')">
@@ -48,26 +49,21 @@
         </div> -->
       </nav>
       <div class="container">
-        <h1 class="mt-5">게시판</h1>
-        <h2>총 건수 : <span th:text=${#lists.size(boards)} ></span></h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col"  >글번호</th>
-              <th scope="col"  >제목</th>
-              <th scope="col"  >내용</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr  th:each="board : ${boards}">
-              <td scope="row" th:text = "${board.id}">1</th>
-              <td th:text = "${board.title}">Mark</td>
-              <td th:text = "${board.content}">Otto</td>
-            </tr>
-            
-          </tbody>
-        </table>
-        <a class="btn btn-primary pull-right" type="submit" value="작성" th:href="@{/board/write}">작성</a>
+        <h1 class="mt-5">글 작성</h1>
+        <form action="#" th:action="@{/board/write}" th:object="${board}" method="post" >
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="title" th:field="*{title}"></textarea>
+            <label for="floatingTextarea">제목</label>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="content" th:field="*{content}" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">내용</label>
+          </div>
+          <button class="btn btn-primary pull-right" th:href="@{/board/list}" >취소</button>
+          <button class="btn btn-primary pull-right" th:href="@{/board/write}" type="submit">쓰기</button>
+
+        </form>
+        
         
       </div>
 
