@@ -51,16 +51,29 @@
       <div class="container">
         <h1 class="mt-5">글 작성</h1>
         <form action="#" th:action="@{/board/write}" th:object="${board}" method="post" >
-          <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="title" th:field="*{title}"></textarea>
-            <label for="floatingTextarea">제목</label>
+          <input type="hidden" th:field="*{id}">
+          <!-- <div class="form-floating">
+            <textarea class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" placeholder="Leave a comment here" id="title" th:field="*{title}"></textarea>
+            <label for="title"></label>
+          </div> -->
+          <input type="text" class="form-control"  th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" id="title" th:field="*{title}" aria-describedby="validationServer03Feedback" required>
+          <div id="validationServer03Feedback" class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+            제목 에러 메세지
           </div>
-          <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="content" th:field="*{content}" style="height: 100px"></textarea>
-            <label for="floatingTextarea2">내용</label>
+          <!-- <div class="form-floating">
+            <textarea class="form-control" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" placeholder="Leave a comment here" id="content" th:field="*{content}" style="height: 100px"></textarea>
+            <label for="content"></label>
+          </div> -->
+          <textarea class="form-control" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" id="content" th:field="*{content}" style="height: 100px"></textarea>
+            <label for="content"></label>
+          <div id="validationServer03Feedback" class="invalid-feedback" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
+            내용 에러 메세지
           </div>
-          <button class="btn btn-primary pull-right" th:href="@{/board/list}" >취소</button>
-          <button class="btn btn-primary pull-right" th:href="@{/board/write}" type="submit">쓰기</button>
+          <div class="pull-right">
+            <a class="btn btn-primary" th:href="@{/board/list}" type="button">취소</a >
+            <button class="btn btn-primary" th:href="@{/board/write}" type="submit">확인</button>
+          </div>
+          
 
         </form>
         
