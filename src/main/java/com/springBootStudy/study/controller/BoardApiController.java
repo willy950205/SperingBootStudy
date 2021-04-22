@@ -21,14 +21,13 @@ public class BoardApiController {
     @GetMapping("/boards")
     List<Board> all(@RequestParam(required = false, defaultValue = "") String title,
                     @RequestParam(required = false, defaultValue = "") String content
-                    ) {
+    ) {
 
-        if(StringUtils.isEmpty(title) && StringUtils.isEmpty(content)){
+        if (StringUtils.isEmpty(title) && StringUtils.isEmpty(content)) {
             return repository.findAll();
-        }else{
+        } else {
             return repository.findByTitleOrContent(title, content);
         }
-
 
 
     }

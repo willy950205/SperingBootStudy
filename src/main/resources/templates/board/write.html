@@ -1,107 +1,110 @@
-
 <!DOCTYPE html>
 <html>
-  <head th:replace="fragments/commons :: head('게시판')">
+<head th:replace="fragments/commons :: head('게시판')">
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
     <!-- Bootstrap CSS -->
-    <link href="sticky-footer-navbar.css" th:href="@{/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="sticky-footer-navbar.css" rel="stylesheet" th:href="@{/sticky-footer-navbar.css}">
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-      crossorigin="anonymous"
+            crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+            rel="stylesheet"
     />
 
     <title>게시판</title>
-  </head>
-  <body>
-    
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/commons :: menu('board')" >
-        <!-- <div class="container-fluid">
-          <a class="navbar-brand" href="#">Spring Boot tutorial</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">홈</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">게시판</a>
-              </li>
-              
-            </ul>
-            
-          </div>
-        </div> -->
-      </nav>
-      <div class="container">
-        <h1 class="mt-5">글 작성</h1>
-        <form action="#" th:action="@{/board/write}" th:object="${board}" method="post" >
-          <input type="hidden" th:field="*{id}">
-          <!-- <div class="form-floating">
-            <textarea class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" placeholder="Leave a comment here" id="title" th:field="*{title}"></textarea>
-            <label for="title"></label>
-          </div> -->
-          <input type="text" class="form-control"  th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" id="title" th:field="*{title}" aria-describedby="validationServer03Feedback" required>
-          <div id="validationServer03Feedback" class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-            제목 에러 메세지
-          </div>
-          <!-- <div class="form-floating">
-            <textarea class="form-control" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" placeholder="Leave a comment here" id="content" th:field="*{content}" style="height: 100px"></textarea>
-            <label for="content"></label>
-          </div> -->
-          <textarea class="form-control" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" id="content" th:field="*{content}" style="height: 100px"></textarea>
-            <label for="content"></label>
-          <div id="validationServer03Feedback" class="invalid-feedback" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
-            내용 에러 메세지
-          </div>
-          <div class="pull-right">
-            <a class="btn btn-primary" th:href="@{/board/list}" type="button">취소</a >
-            <button class="btn btn-primary" th:href="@{/board/write}" type="submit">확인</button>
-          </div>
-          
+</head>
+<body>
 
-        </form>
-        
-        
+<!-- Fixed navbar -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/commons :: menu('board')">
+    <!-- <div class="container-fluid">
+      <a class="navbar-brand" href="#">Spring Boot tutorial</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">홈</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">게시판</a>
+          </li>
+
+        </ul>
+
       </div>
+    </div> -->
+</nav>
+<div class="container">
+    <h1 class="mt-5">글 작성</h1>
+    <form action="#" method="post" th:action="@{/board/write}" th:object="${board}">
+        <input th:field="*{id}" type="hidden">
+        <!-- <div class="form-floating">
+          <textarea class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" placeholder="Leave a comment here" id="title" th:field="*{title}"></textarea>
+          <label for="title"></label>
+        </div> -->
+        <input aria-describedby="validationServer03Feedback" class="form-control" id="title" required
+               th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" th:field="*{title}" type="text">
+        <div class="invalid-feedback" id="validationServer03Feedback" th:errors="*{title}"
+             th:if="${#fields.hasErrors('title')}">
+            제목 에러 메세지
+        </div>
+        <!-- <div class="form-floating">
+          <textarea class="form-control" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" placeholder="Leave a comment here" id="content" th:field="*{content}" style="height: 100px"></textarea>
+          <label for="content"></label>
+        </div> -->
+        <textarea class="form-control" id="content" style="height: 100px"
+                  th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" th:field="*{content}"></textarea>
+        <label for="content"></label>
+        <div class="invalid-feedback" id="validationServer03Feedback"
+             th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" th:errors="*{content}"
+             th:if="${#fields.hasErrors('content')}">
+            내용 에러 메세지
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-primary" th:href="@{/board/list}" type="button">취소</a>
+            <button class="btn btn-primary" th:href="@{/board/write}" type="submit">확인</button>
+        </div>
 
-    <!-- Begin page content -->
-    <!-- <main class="flex-shrink-0">
-      
-    </main> -->
 
-    
+    </form>
 
-    <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</div>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-    -->
-  </body>
+<!-- Begin page content -->
+<!-- <main class="flex-shrink-0">
+
+</main> -->
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script
+        crossorigin="anonymous"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+-->
+</body>
 </html>
